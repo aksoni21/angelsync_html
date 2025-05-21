@@ -453,9 +453,270 @@
             top: 25px;
             left: 20px;
         }
+
+        /* Staff View Button */
+        .staff-view-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .staff-view-button:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Staff View Modal */
+        .staff-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .staff-modal.active {
+            display: block;
+        }
+
+        .staff-modal-content {
+            background: var(--white);
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .startup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .startup-card {
+            background: var(--background);
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .startup-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .status-new {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-review {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .startup-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+
+        .startup-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-button {
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-button.view {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+
+        .action-button.edit {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .staff-modal-content {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .startup-actions {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="staff-view-button" onclick="toggleStaffView()">Angel View</button>
+    
+    <!-- Add the staff modal section before the hero section -->
+    <div class="staff-modal" id="staffModal">
+        <div class="staff-modal-content">
+            <button class="close-modal" onclick="toggleStaffView()">×</button>
+            <h2>Startup Dashboard</h2>
+            <p>Current active pitch deck reviews and submissions</p>
+            
+            <div class="startup-grid">
+                <div class="startup-card">
+                    <span class="status-badge status-new">New Submission</span>
+                    <h3>TechFlow AI</h3>
+                    <p>AI-powered workflow automation platform for enterprise teams</p>
+                    <div class="startup-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$2M</div>
+                            <div class="metric-label">Raising</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">Seed</div>
+                            <div class="metric-label">Stage</div>
+                        </div>
+                    </div>
+                    <div class="startup-actions">
+                        <button class="action-button view">View Pitch Deck</button>
+                        <button class="action-button edit">Add Feedback</button>
+                    </div>
+                </div>
+
+                <div class="startup-card">
+                    <span class="status-badge status-review">Under Review</span>
+                    <h3>GreenCommute</h3>
+                    <p>Sustainable last-mile delivery solution using electric vehicles</p>
+                    <div class="startup-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$5M</div>
+                            <div class="metric-label">Raising</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">Series A</div>
+                            <div class="metric-label">Stage</div>
+                        </div>
+                    </div>
+                    <div class="startup-actions">
+                        <button class="action-button view">View Pitch Deck</button>
+                        <button class="action-button edit">Add Feedback</button>
+                    </div>
+                </div>
+
+                <div class="startup-card">
+                    <span class="status-badge status-completed">Completed</span>
+                    <h3>HealthSync</h3>
+                    <p>Healthcare data integration platform for hospitals</p>
+                    <div class="startup-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$3M</div>
+                            <div class="metric-label">Raised</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">Seed</div>
+                            <div class="metric-label">Stage</div>
+                        </div>
+                    </div>
+                    <div class="startup-actions">
+                        <button class="action-button view">View Final Deck</button>
+                        <button class="action-button edit">View History</button>
+                    </div>
+                </div>
+
+                <div class="startup-card">
+                    <span class="status-badge status-review">Under Review</span>
+                    <h3>CryptoSecure</h3>
+                    <p>Institutional-grade cryptocurrency custody solution</p>
+                    <div class="startup-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$8M</div>
+                            <div class="metric-label">Raising</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">Series A</div>
+                            <div class="metric-label">Stage</div>
+                        </div>
+                    </div>
+                    <div class="startup-actions">
+                        <button class="action-button view">View Pitch Deck</button>
+                        <button class="action-button edit">Add Feedback</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -575,6 +836,13 @@
     </div>
 
     <script>
+        // Add this before any existing scripts
+        function toggleStaffView() {
+            const modal = document.getElementById('staffModal');
+            modal.classList.toggle('active');
+            document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
         // Contact modal functions
         function openContactModal() {
             const modal = document.getElementById('contactModal');
